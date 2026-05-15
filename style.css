@@ -1,0 +1,362 @@
+/* =============================================
+   SOP MUSTAFA PORTFOLIO — style.css
+   Dark · Bold · Creative
+   ============================================= */
+
+/* FONTS */
+.font-bebas { font-family: 'Bebas Neue', cursive; }
+.font-syne  { font-family: 'Syne', sans-serif; }
+.font-mono  { font-family: 'JetBrains Mono', monospace; }
+
+/* ROOT VARIABLES */
+:root {
+  --accent: #ff4d00;
+  --accent-dim: rgba(255, 77, 0, 0.15);
+  --bg: #0a0a0a;
+  --bg2: #080808;
+  --border: #1a1a1a;
+  --text-muted: #6b7280;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #ff4d00; border-radius: 2px; }
+
+/* SELECTION */
+::selection { background: #ff4d00; color: #000; }
+
+/* =============================================
+   NOISE OVERLAY
+   ============================================= */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+#navbar {
+  backdrop-filter: blur(12px);
+  background: rgba(10,10,10,0.7);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s, background 0.4s;
+}
+#navbar.scrolled {
+  border-bottom-color: #1a1a1a;
+  background: rgba(10,10,10,0.95);
+}
+
+/* =============================================
+   GRID BACKGROUND (Hero)
+   ============================================= */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,77,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,77,0,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* =============================================
+   ORB GLOWS
+   ============================================= */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,77,0,0.15), transparent 70%);
+  top: -100px; right: -100px;
+  animation: orb-float 8s ease-in-out infinite;
+}
+.orb-2 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255,77,0,0.08), transparent 70%);
+  bottom: 50px; left: 10%;
+  animation: orb-float 6s ease-in-out infinite reverse;
+}
+.orb-contact {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,77,0,0.08), transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+
+/* =============================================
+   TEXT STROKE EFFECT
+   ============================================= */
+.text-stroke {
+  -webkit-text-stroke: 2px rgba(255,255,255,0.15);
+  color: transparent;
+}
+.text-stroke-sm {
+  -webkit-text-stroke: 2px rgba(255,77,0,0.4);
+  color: transparent;
+}
+
+/* =============================================
+   HERO ANIMATIONS
+   ============================================= */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+/* =============================================
+   FLOATING TAGS (Hero)
+   ============================================= */
+.floating-tag {
+  pointer-events: none;
+  animation: tag-float 6s ease-in-out infinite;
+  backdrop-filter: blur(4px);
+  background: rgba(10,10,10,0.8);
+}
+.tag-1 { top: 20%; left: 5%; animation-delay: 0s; }
+.tag-2 { top: 70%; left: 3%; animation-delay: 1.5s; }
+.tag-3 { top: 30%; right: 5%; animation-delay: 0.8s; }
+.tag-4 { top: 75%; right: 8%; animation-delay: 2.2s; }
+
+@keyframes tag-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* =============================================
+   SCROLL INDICATOR
+   ============================================= */
+.scroll-indicator { position: absolute; }
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, #ff4d00, transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+/* =============================================
+   CTA BUTTON
+   ============================================= */
+.cta-btn {
+  position: relative;
+  overflow: hidden;
+}
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #ff4d00;
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  z-index: -1;
+}
+.cta-btn:hover { color: #000; }
+
+/* =============================================
+   STAT BOXES
+   ============================================= */
+.stat-box {
+  transition: all 0.3s;
+  background: rgba(255,77,0,0.03);
+}
+.stat-box:hover {
+  background: rgba(255,77,0,0.08);
+  border-color: rgba(255,77,0,0.5);
+  transform: translateY(-4px);
+}
+
+/* =============================================
+   ABOUT PHOTO
+   ============================================= */
+.about-photo-wrap { position: relative; }
+.photo-corner {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-color: #ff4d00;
+  border-style: solid;
+  border-width: 0;
+}
+.photo-corner.tl { top: -4px; left: -4px; border-top-width: 2px; border-left-width: 2px; }
+.photo-corner.tr { top: -4px; right: -4px; border-top-width: 2px; border-right-width: 2px; }
+.photo-corner.bl { bottom: -4px; left: -4px; border-bottom-width: 2px; border-left-width: 2px; }
+.photo-corner.br { bottom: -4px; right: -4px; border-bottom-width: 2px; border-right-width: 2px; }
+
+/* =============================================
+   SKILL BARS
+   ============================================= */
+.skill-bar {
+  height: 2px;
+  background: #1a1a1a;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff4d00, #ff8c00);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+.skill-card:hover .skill-bar-fill,
+.skill-bar-fill.animated {
+  transform: scaleX(1);
+}
+
+/* =============================================
+   SKILL CARDS
+   ============================================= */
+.skill-card {
+  background: #0d0d0d;
+  position: relative;
+  overflow: hidden;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0% 100%, rgba(255,77,0,0.06), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.skill-card:hover::before { opacity: 1; }
+
+/* =============================================
+   PROJECT CARDS
+   ============================================= */
+.project-card {
+  background: #0d0d0d;
+  overflow: hidden;
+  position: relative;
+}
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px;
+  height: 0;
+  background: #ff4d00;
+  transition: height 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.project-card:hover::after { height: 100%; }
+
+/* =============================================
+   EXPERIENCE CARDS
+   ============================================= */
+.exp-card {
+  background: #0d0d0d;
+  position: relative;
+  overflow: hidden;
+}
+
+/* =============================================
+   CERT CARDS
+   ============================================= */
+.cert-card {
+  background: #0d0d0d;
+  position: relative;
+  overflow: hidden;
+}
+.cert-glow {
+  position: absolute;
+  top: 0; right: 0;
+  width: 150px; height: 150px;
+  background: radial-gradient(circle, rgba(255,77,0,0.08), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cert-glow-strong {
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255,77,0,0.15), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.featured-cert {
+  background: linear-gradient(135deg, #0d0d0d 0%, rgba(255,77,0,0.04) 100%);
+}
+.proof-box {
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+/* =============================================
+   CONTACT LINKS
+   ============================================= */
+.contact-link {
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.contact-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: #ff4d00;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.contact-link:hover::before { transform: scaleX(1); }
+
+/* =============================================
+   REVEAL ANIMATION (Scroll)
+   ============================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================================
+   MOBILE MENU
+   ============================================= */
+#mobile-menu.open { transform: translateX(0); }
+
+/* =============================================
+   HAMBURGER ANIMATION
+   ============================================= */
+#hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+#hamburger.active span:nth-child(2) { opacity: 0; }
+#hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 24px; }
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 768px) {
+  .floating-tag { display: none; }
+  .scroll-indicator { display: none; }
+  .photo-badge { font-size: 0.6rem; }
+}
